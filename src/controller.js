@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import notes from './notes.js';
+import { predictImage } from './predict-service.js';
 
 export const createNote = (req, res, next) => {
     const { title = 'untitled', tags, body } = req.body;
@@ -83,5 +84,20 @@ export const deleteNoteById = (req, res) => {
   return res.status(404).json({
     status: 'fail',
     message: 'Catatan gagal dihapus. Id tidak ditemukan'
+  });
+};
+ 
+export const getPredictResult = async (req, res) => {
+  const photo = req.files[0].buffer;
+  const predict = await predictImage(photo);
+  const { diseaseLabel, confidenceScore } = predict;
+ 
+  return res.status(200).json({
+    status: 'success',
+    message: 'Predict success',
+    data: {
+      disease: diseaseLabel,
+      confidenceScore
+    }
   });
 };

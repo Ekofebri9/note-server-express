@@ -1,5 +1,6 @@
 import express from 'express';
-import { createNote,deleteNoteById,editNoteById,getNoteById,getNotes } from './controller.js';
+import { createNote,deleteNoteById,editNoteById,getNoteById,getNotes,getPredictResult } from './controller.js';
+import multer from 'multer';
 
 const router = express.Router();
 
@@ -36,6 +37,9 @@ router.get('/notes', getNotes);
 router.get('/notes/:id', getNoteById);
 router.put('/notes/:id', editNoteById);
 router.delete('/notes/:id', deleteNoteById);
+
+const upload = multer(); 
+router.post('/predict', upload.any(), getPredictResult);
 
 
 router.use((_, res) => {

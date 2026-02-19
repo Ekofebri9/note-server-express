@@ -1,0 +1,3 @@
+onlyBuiltDependencies:
+  - '@tensorflow/tfjs-node'
+  - core-js

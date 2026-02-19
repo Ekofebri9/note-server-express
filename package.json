@@ -14,9 +14,12 @@
   "license": "ISC",
   "packageManager": "pnpm@10.29.3",
   "dependencies": {
+    "@tensorflow/tfjs-node": "^4.22.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
-    "nanoid": "^5.1.6"
+    "multer": "^2.0.2",
+    "nanoid": "^5.1.6",
+    "node-gyp": "^12.2.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
