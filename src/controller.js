@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import notes from './notes.js';
 import { predictImage } from './predict-service.js';
+import generateResponseLlm  from './llm-service.js';
 
 export const createNote = (req, res, next) => {
     const { title = 'untitled', tags, body } = req.body;
@@ -98,6 +99,18 @@ export const getPredictResult = async (req, res) => {
     data: {
       disease: diseaseLabel,
       confidenceScore
+    }
+  });
+};
+
+export const getChatbotResponse = async (req, res) => {
+  const { question } = req.body;
+  const response = await generateResponseLlm(question);
+  return res.status(200).json({
+    status: 'success',
+    message: 'Chatbot response success',
+    data: {
+      response
     }
   });
 };

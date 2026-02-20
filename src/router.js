@@ -1,8 +1,12 @@
 import express from 'express';
-import { createNote,deleteNoteById,editNoteById,getNoteById,getNotes,getPredictResult } from './controller.js';
+import { createNote,deleteNoteById,editNoteById,getChatbotResponse,getNoteById,getNotes,getPredictResult } from './controller.js';
 import multer from 'multer';
 
 const router = express.Router();
+
+router.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 // router.get('/', (_, res) => {
 //     res.send('Homepage');
@@ -40,6 +44,7 @@ router.delete('/notes/:id', deleteNoteById);
 
 const upload = multer(); 
 router.post('/predict', upload.any(), getPredictResult);
+router.post('/chatbot', getChatbotResponse);
 
 
 router.use((_, res) => {
